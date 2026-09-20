@@ -1,24 +1,27 @@
+# importing libraries
 from machine import Pin
 import time
 
 
-# set up GPIO16. This is the pin on bottom right.
-gpio16 = Pin(16, Pin.OUT)
+# set up GPIO15 as a digital output.
+# This is the pin on the bottom left.
+gpio15 = Pin(15, Pin.OUT)
 
-# Set up the onboard LED
-# led = Pin("LED", Pin.OUT)
+# set up the onboard LED as a digital output
+# the LED is hard-wired to GPIO25
+# led = Pin(25, Pin.OUT)
 
 
 while True:
     
-    gpio16.on()   # Flip GPIO16
+    gpio15.on()   # flip GPIO15
 
-    time.sleep(1)     # Wait 1 second
+    time.sleep(1)     # wait 1 second
 
-    gpio16.off()   # Flip GPIO16
+    gpio15.off()   # flip GPIO15
 
-    time.sleep(1)     # Wait 1 second
+    time.sleep(1)     # wait 1 second
 
 
-    #led.toggle()      # Switch LED on/off
-    # time.sleep(1)     # Wait 1 second
+    # led.toggle()      # switch LED on/off
+    # time.sleep(1)     # wait 1 second
