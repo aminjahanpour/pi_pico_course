@@ -11,7 +11,13 @@ gpio15 = Pin(15, Pin.OUT)
 
 
 while True:
-    
+
+
+
+    ##########################################
+    # Handling digital output
+
+
     gpio15.on()   # flip GPIO15
 
     time.sleep(0.1)     # wait 1 second
@@ -23,6 +29,10 @@ while True:
 
 
 
+
+
+    ##########################################
+    # Handling digital input
 
     if gpio14.value() == 0:
         print(1)
