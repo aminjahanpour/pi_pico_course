@@ -5,7 +5,7 @@ from machine import Pin, PWM
 pwm_pin = PWM(Pin(15))
 
 # frequency: how many times in a second the pin is turned on and off
-# this works fine for an LED
+# 1000 works fine for an LED
 pwm_pin.freq(1000)
 
 
