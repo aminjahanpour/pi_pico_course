@@ -1,6 +1,6 @@
 # INSTALL    ssd1306   FROM   Tools -> Manage packages...
 
-from machine import Pin, ADC, PWM, SPI
+from machine import Pin, ADC, SPI
 import time
 import ssd1306 # this is the library for the OLED
 from servo import Servo
@@ -69,7 +69,7 @@ while True:
     
     pot_value = pot_pin.read_u16()
     
-    servo_angle = int((pot_value / 65535) * 360)
+    servo_angle = int((pot_value / 65535) * 180)
     
     my_servo.write(servo_angle)
 
