@@ -1,6 +1,6 @@
 # INSTALL    micropython-servo   FROM   Tools -> Manage packages...
 
-from machine import Pin, ADC, PWM
+from machine import Pin, ADC
 import time
 from servo import Servo
 
