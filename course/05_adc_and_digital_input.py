@@ -2,20 +2,21 @@
 from machine import Pin, ADC
 import time
 
+# let's define the digital input pin
 button = Pin(14, Pin.IN, Pin.PULL_UP)
 
 # we only have three pins on Pico that can read analog signal
 # Pin 26, 27, and 28
 # in this example, let's use Pin 26
 
-potentiameter = ADC(Pin(26))
+potentiometer = ADC(Pin(26))
 
 while True:
 
     if button.value() == 0:
 
         # let's get the raw data first
-        adc_raw_value = potentiameter.read_u16()
+        adc_raw_value = potentiometer.read_u16()
 
         # the raw data ranges from 0 to 65535 so let's normalize it
         # 65535 is actually 2 to the power of 16 (menus 1)

@@ -6,8 +6,6 @@ import ssd1306 # this is the library for the OLED
 
 pot_pin = ADC(Pin(26))
 
-servo.freq(50)
-
 # let's use the OLED library to define an SPI object
 spi = SPI(
     0,
@@ -46,10 +44,7 @@ while True:
     pot_value = pot_pin.read_u16()
     
     pot_norm = pot_value / 65535
-
-    print(pot_norm, duty_cycle)
-    time.sleep(0.02)
-    
+   
     oled.fill(0)
     oled.text(str(pot_norm), 0, 0)
     oled.show()

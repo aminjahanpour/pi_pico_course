@@ -1,7 +1,6 @@
 # INSTALL    ssd1306   FROM   Tools -> Manage packages...
 
 from machine import Pin, SPI
-import time
 import ssd1306 # this is the library for the OLED
 
 # let's use the OLED library to define an SPI object

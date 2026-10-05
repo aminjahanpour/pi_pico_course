@@ -2,11 +2,12 @@
 from machine import Pin
 import time
 
+# I can have both digital input and digital output pins on my board
 
-# my digital input
+# my digital input pin
 gpio14 = Pin(14, Pin.IN, Pin.PULL_UP)
 
-# my digital output
+# my digital output pin
 gpio15 = Pin(15, Pin.OUT)
 
 
@@ -35,8 +36,8 @@ while True:
     # Handling digital input
 
     if gpio14.value() == 0:
-        print(1)
-    else:
         print(0)
+    else:
+        print(1)
 
 

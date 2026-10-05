@@ -1,7 +1,7 @@
 from machine import Pin, ADC, PWM
 import time
 
-# this is our go-to pin for analog sinals
+# this is our go-to pin for analog signals
 pot_pin = ADC(Pin(26))
 
 # let's have the servo on the top left pin (GPIO0)
