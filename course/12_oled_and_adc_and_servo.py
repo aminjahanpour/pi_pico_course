@@ -18,6 +18,10 @@ pot_pin = ADC(Pin(26))
 my_servo = Servo(pin_id=0)
 
 
+##############################################################
+# SERVO
+led = Pin(25, Pin.OUT)
+
 
 ##############################################################
 # OLED
@@ -73,7 +77,8 @@ while True:
     
     my_servo.write(servo_angle)
 
-    time.sleep(0.02)
+    time.sleep(0.2)
+    led.toggle()
     
     oled.fill(0)
     oled.text(f"Angle: {servo_angle}", 0, 0)
