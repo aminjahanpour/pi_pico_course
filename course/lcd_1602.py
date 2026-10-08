@@ -1,5 +1,5 @@
 from machine import I2C, Pin
-from lcd import LCD
+from lcd1602 import LCD
 
 i2c = I2C(0, scl=Pin(5), sda=Pin(4), freq=400000)
 
