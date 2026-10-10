@@ -1,8 +1,9 @@
-from machine import Pin, SPI
+from machine import Pin, SPI, PWM
 from nrf24l01 import NRF24L01
 import struct
 import time
 
+led = Pin(25, Pin.OUT)
 
 # ==============================
 # NRF24L01
@@ -43,14 +44,46 @@ print("EN_RXADDR :", hex(radio.reg_read(0x02)))
 print("RF_CH     :", hex(radio.reg_read(0x05)))
 print("RF_SETUP  :", hex(radio.reg_read(0x06)))
 
-print()
 
+
+
+pwm_pin_left = PWM(Pin(21))
+pwm_pin_right = PWM(Pin(22))
+
+pwm_pin_left.freq(20000)
+pwm_pin_right.freq(20000)
+
+
+left_duty_cycle = 0
+right_duty_cycle = 0
+
+left_duty_cycle_new = 0
+right_duty_cycle_new = 0
+
+counter = 0
 
 # ==============================
 # MAIN LOOP
 # ==============================
 
 while True:
+
+    counter = counter + 1
+
+    if counter % 100 == 0:
+        led.toggle()
+        counter = 0
+
+    if left_duty_cycle_new != left_duty_cycle:
+        pwm_pin_left.duty_u16(left_duty_cycle_new)
+        left_duty_cycle_new = left_duty_cycle
+        
+        
+
+    if right_duty_cycle_new != right_duty_cycle:
+        pwm_pin_right.duty_u16(right_duty_cycle_new)
+        right_duty_cycle_new = right_duty_cycle
+        
 
     if radio.any():
 
@@ -68,4 +101,13 @@ while True:
             "SW:", sw
         )
 
+        left_duty_cycle_new = x
+        right_duty_cycle_new = y
+        
+        time.sleep_ms(10)
+
+
+
+
     time.sleep_ms(10)
+

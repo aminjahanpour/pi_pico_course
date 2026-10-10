@@ -1,13 +1,17 @@
-from machine import Pin, SPI
+
+from machine import Pin, SPI, ADC
 from nrf24l01 import NRF24L01
 import struct
 import time
 
+led = Pin(25, Pin.OUT)
 
-# ==============================
+# JOYSTICK
+x_axis = ADC(Pin(26))
+y_axis = ADC(Pin(27))
+button = Pin(15, Pin.IN, Pin.PULL_UP)
+
 # NRF24L01
-# ==============================
-
 spi = SPI(
     0,
     baudrate=1_000_000,
@@ -29,43 +33,57 @@ radio = NRF24L01(
     payload_size=8
 )
 
-radio.open_rx_pipe(0, b"NODE2")
-radio.start_listening()
+radio.open_tx_pipe(b"NODE2")
+radio.stop_listening()
 
+print("TRANSMITTER READY")
+print("CONFIG:", hex(radio.reg_read(0x00)))
+print("RF_CH:", hex(radio.reg_read(0x05)))
+print("RF_SETUP:", hex(radio.reg_read(0x06)))
 
-print()
-print("==============================")
-print("JOYSTICK RECEIVER READY")
-print("==============================")
-
-print("CONFIG    :", hex(radio.reg_read(0x00)))
-print("EN_RXADDR :", hex(radio.reg_read(0x02)))
-print("RF_CH     :", hex(radio.reg_read(0x05)))
-print("RF_SETUP  :", hex(radio.reg_read(0x06)))
-
-print()
-
-
-# ==============================
-# MAIN LOOP
-# ==============================
+counter_ = 0
 
 while True:
 
-    if radio.any():
+    counter_ += 1
 
-        data = radio.recv()
+    if counter_ >= 2:
+        led.toggle()
+        counter_ = 0
 
-        # Unpack:
-        #   2 bytes X
-        #   2 bytes Y
-        #   1 byte button
-        x, y, sw = struct.unpack("<HHB", data[:5])
+    # Read joystick
+    x = x_axis.read_u16()
+    y = y_axis.read_u16()
+    sw = button.value()
 
-        print(
-            "X:", x,
-            "Y:", y,
-            "SW:", sw
-        )
+    # Transmit X, Y, and SW only
+    # 2 bytes + 2 bytes + 1 byte + 3 padding bytes = 8 bytes
+    message = struct.pack("<HHBxxx", x, y, sw)
 
-    time.sleep_ms(10)
+    attempts = 0
+
+    while True:
+        attempts += 1
+
+        try:
+            radio.send(message)
+
+            print(
+                "SUCCESS:",
+                "X:", x,
+                "Y:", y,
+                "SW:", sw,
+                "attempts:", attempts
+            )
+            break
+
+        except OSError as e:
+            print(
+                "RETRY:",
+                "attempt:", attempts,
+                "error:", e
+            )
+            time.sleep_ms(20)
+
+    time.sleep_ms(100)
+
