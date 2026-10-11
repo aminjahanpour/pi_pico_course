@@ -22,13 +22,16 @@ spi = SPI(
 csn = Pin(20, Pin.OUT, value=1)
 ce = Pin(17, Pin.OUT, value=0)
 
-radio = NRF24L01(
-    spi,
-    csn,
-    ce,
-    channel=46,
-    payload_size=8
-)
+
+radio = NRF24L01(          # Create and configure the nRF24L01 radio object
+    spi,                   # SPI interface used to communicate with the radio
+    csn,                   # Chip Select pin: selects the radio for SPI communication
+    ce,                    # Chip Enable pin: controls the radio's operating mode
+    channel=46,             # Set the wireless channel to 46
+    payload_size=8          # Set each data packet to 8 bytes
+)                          # Finish creating the radio object
+
+
 
 radio.open_rx_pipe(0, b"NODE2")
 radio.start_listening()
