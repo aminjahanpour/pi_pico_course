@@ -14,13 +14,15 @@ import ssd1306 # this is the library for the OLED
 pot_pin = ADC(Pin(26))
 
 # let's use the OLED library to define an SPI object
+
+
 spi = SPI(
-    0,
-    baudrate=   10_000_000,
-    polarity=   0,
-    phase=      0,
-    sck=        Pin(18),
-    mosi=       Pin(19)
+    0,                      # Select SPI interface 0 on the Raspberry Pi Pico
+    baudrate=10_000_000,    # Set the SPI communication speed to 10 MHz
+    polarity=0,             # Keep the clock low when idle (CPOL = 0)
+    phase=0,                # Read data on the first clock edge (CPHA = 0)
+    sck=Pin(18),            # Use GP18 as the SPI clock (SCK) pin
+    mosi=Pin(19)            # Use GP19 to send data from the Pico to the radio
 )
 
 dc =    Pin(21) # Data/Command
