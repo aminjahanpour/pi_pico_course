@@ -4,6 +4,12 @@ from nrf24l01 import NRF24L01
 import struct
 import time
 
+
+
+#######################################################################
+# SETTING UP
+
+
 led = Pin(25, Pin.OUT)
 
 # JOYSTICK
@@ -34,6 +40,13 @@ radio = NRF24L01(          # Create and configure the nRF24L01 radio object
 )                          # Finish creating the radio object
 
 
+
+
+
+
+#######################################################################
+# INITIALIZE
+
 radio.open_tx_pipe(b"NODE2")
 radio.stop_listening()
 
@@ -43,6 +56,17 @@ print("RF_CH:", hex(radio.reg_read(0x05)))
 print("RF_SETUP:", hex(radio.reg_read(0x06)))
 
 counter_ = 0
+
+
+
+
+
+
+
+
+#######################################################################
+# MAIN LOOP
+
 
 while True:
 

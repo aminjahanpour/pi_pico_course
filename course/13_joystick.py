@@ -2,9 +2,9 @@ from machine import Pin, ADC
 import time
 
 
-x = ADC(Pin(26))
-y = ADC(Pin(27))
-sw = Pin(15, Pin.IN, Pin.PULL_UP)
+x = ADC(Pin(26))                    # ADC
+y = ADC(Pin(27))                    # ADC
+sw = Pin(15, Pin.IN, Pin.PULL_UP)   # Digital Input
 
 while True:
     x_ = x.read_u16() / 32768

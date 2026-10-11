@@ -4,6 +4,13 @@ from machine import Pin, ADC, SPI
 import time
 import ssd1306 # this is the library for the OLED
 
+
+
+
+#######################################################################
+# SETTING UP
+
+# define the analog signal
 pot_pin = ADC(Pin(26))
 
 # let's use the OLED library to define an SPI object
@@ -30,6 +37,12 @@ oled = ssd1306.SSD1306_SPI(
     cs
 )
 
+
+
+
+#######################################################################
+# INITIALIZE
+
 oled.fill(0)                        # clear the screen
 oled.text("My Brand",    0, 0)      # write on x=0 and y=0 (top left corner)
 oled.text("By me",       0, 20)     # write on x=0 and y=20 (middle left)
@@ -38,6 +51,13 @@ oled.show()                         # display the drawings
 
 
 time.sleep(4)
+
+
+
+
+
+#######################################################################
+# MAIN LOOP
 
 while True:
     

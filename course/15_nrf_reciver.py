@@ -3,11 +3,18 @@ from nrf24l01 import NRF24L01
 import struct
 import time
 
+
+
+
+#######################################################################
+# SETTING UP
+
+
 led = Pin(25, Pin.OUT)
 
-# ==============================
+
+
 # NRF24L01
-# ==============================
 
 spi = SPI(
     0,
@@ -31,6 +38,13 @@ radio = NRF24L01(          # Create and configure the nRF24L01 radio object
     payload_size=8          # Set each data packet to 8 bytes
 )                          # Finish creating the radio object
 
+
+
+
+
+
+#######################################################################
+# INITIALIZE
 
 
 radio.open_rx_pipe(0, b"NODE2")
@@ -65,9 +79,12 @@ right_duty_cycle_new = 0
 
 counter = 0
 
-# ==============================
+
+
+
+
+#######################################################################
 # MAIN LOOP
-# ==============================
 
 while True:
 
