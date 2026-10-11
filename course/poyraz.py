@@ -1,7 +1,7 @@
 from machine import Pin, PWM
 import time
 
-pwm_pin = PWM(Pin(15))
+pwm_pin = PWM(Pin(0))
 
 # Set PWM frequency to 1000 Hz
 pwm_pin.freq(1000)
