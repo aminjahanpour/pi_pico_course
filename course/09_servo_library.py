@@ -17,6 +17,7 @@ my_servo = Servo(pin_id=0)
 # let's do some quick moves before getting into the loop
 delay = 0.3
 
+
 my_servo.write(0) # servo angle = 0
 time.sleep(delay)
 
