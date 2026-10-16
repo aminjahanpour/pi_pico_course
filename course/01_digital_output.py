@@ -31,5 +31,5 @@ while True:
 
     # Toggling the board LED
 
-    # led.toggle()      # switch LED on/off
-    # time.sleep(1)     # wait 1 second
+    led.toggle()      # switch LED on/off
+    
