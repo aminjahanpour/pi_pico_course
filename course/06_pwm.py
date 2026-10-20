@@ -13,7 +13,7 @@ pwm_pin.freq(1000)
 max_duty_cycle = 65535
 
 # duty cycle: what percentage of the time, the pin is on
-duty_cycle = int(0.95 * max_duty_cycle)
+duty_cycle = int(0.5 * max_duty_cycle)
 
 
 pwm_pin.duty_u16(duty_cycle)
