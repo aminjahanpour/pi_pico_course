@@ -15,16 +15,16 @@ led = Pin(25, Pin.OUT)
 
 
 # NRF24L01
-
 spi = SPI(
-    0,
-    baudrate=1_000_000,
-    polarity=0,
-    phase=0,
-    sck=Pin(18),
-    mosi=Pin(19),
-    miso=Pin(16)
+    0,                      # Select SPI interface 0 on the Raspberry Pi Pico
+    baudrate=1_000_000,     # Set the SPI communication speed to 1 MHz
+    polarity=0,             # Keep the clock low when idle (CPOL = 0)
+    phase=0,                # Read data on the first clock edge (CPHA = 0)
+    sck=Pin(18),            # Use GP18 as the SPI clock (SCK) pin
+    mosi=Pin(19),           # Use GP19 to send data from the Pico to the radio
+    miso=Pin(16)            # Use GP16 to send data from the device to the Pico
 )
+
 
 csn = Pin(20, Pin.OUT, value=1)
 ce = Pin(17, Pin.OUT, value=0)
@@ -64,10 +64,10 @@ print("RF_SETUP  :", hex(radio.reg_read(0x06)))
 
 
 
-pwm_pin_left = PWM(Pin(21))
+pwm_pin_left  = PWM(Pin(21))
 pwm_pin_right = PWM(Pin(22))
 
-pwm_pin_left.freq(20000)
+pwm_pin_left.freq( 20000)
 pwm_pin_right.freq(20000)
 
 
@@ -94,12 +94,14 @@ while True:
         led.toggle()
         counter = 0
 
+
+    # update the duty cycle only if it is a new value
     if left_duty_cycle_new != left_duty_cycle:
         pwm_pin_left.duty_u16(left_duty_cycle_new)
         left_duty_cycle_new = left_duty_cycle
         
         
-
+    # update the duty cycle only if it is a new value
     if right_duty_cycle_new != right_duty_cycle:
         pwm_pin_right.duty_u16(right_duty_cycle_new)
         right_duty_cycle_new = right_duty_cycle

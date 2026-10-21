@@ -22,7 +22,7 @@ spi = SPI(
     polarity=0,             # Keep the clock low when idle (CPOL = 0)
     phase=0,                # Read data on the first clock edge (CPHA = 0)
     sck=Pin(18),            # Use GP18 as the SPI clock (SCK) pin
-    mosi=Pin(19)            # Use GP19 to send data from the Pico to the radio
+    mosi=Pin(19)            # Use GP19 to send data from the Pico to the device
 )
 
 dc =    Pin(21) # Data/Command

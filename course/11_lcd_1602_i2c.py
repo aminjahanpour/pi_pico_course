@@ -15,3 +15,4 @@ lcd = LCD(i2c, addr=0x27)
 lcd.clear()
 lcd.write(0, 0, "Hello, John!")
 lcd.write(0, 1, "LCD1602 + Pico")
+

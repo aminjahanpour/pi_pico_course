@@ -19,17 +19,19 @@ button = Pin(15, Pin.IN, Pin.PULL_UP)
 
 # NRF24L01
 spi = SPI(
-    0,
-    baudrate=1_000_000,
-    polarity=0,
-    phase=0,
-    sck=Pin(18),
-    mosi=Pin(19),
-    miso=Pin(16)
+    0,                      # Select SPI interface 0 on the Raspberry Pi Pico
+    baudrate=1_000_000,     # Set the SPI communication speed to 1 MHz
+    polarity=0,             # Keep the clock low when idle (CPOL = 0)
+    phase=0,                # Read data on the first clock edge (CPHA = 0)
+    sck=Pin(18),            # Use GP18 as the SPI clock (SCK) pin
+    mosi=Pin(19),           # Use GP19 to send data from the Pico to the radio
+    miso=Pin(16)            # Use GP16 to send data from the device to the Pico
 )
 
+
+
 csn = Pin(20, Pin.OUT, value=1)
-ce = Pin(17, Pin.OUT, value=0)
+ce  = Pin(17, Pin.OUT, value=0)
 
 radio = NRF24L01(          # Create and configure the nRF24L01 radio object
     spi,                   # SPI interface used to communicate with the radio
@@ -37,7 +39,7 @@ radio = NRF24L01(          # Create and configure the nRF24L01 radio object
     ce,                    # Chip Enable pin: controls the radio's operating mode
     channel=46,             # Set the wireless channel to 46
     payload_size=8          # Set each data packet to 8 bytes
-)                          # Finish creating the radio object
+)                          
 
 
 
@@ -47,13 +49,13 @@ radio = NRF24L01(          # Create and configure the nRF24L01 radio object
 #######################################################################
 # INITIALIZE
 
-radio.open_tx_pipe(b"NODE2")
+radio.open_tx_pipe(b"NODE1")
 radio.stop_listening()
 
 print("TRANSMITTER READY")
-print("CONFIG:", hex(radio.reg_read(0x00)))
-print("RF_CH:", hex(radio.reg_read(0x05)))
-print("RF_SETUP:", hex(radio.reg_read(0x06)))
+print("CONFIG:",    hex(radio.reg_read(0x00)))
+print("RF_CH:",     hex(radio.reg_read(0x05)))
+print("RF_SETUP:",  hex(radio.reg_read(0x06)))
 
 counter_ = 0
 

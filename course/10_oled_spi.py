@@ -1,21 +1,8 @@
 # INSTALL    ssd1306   FROM   Tools -> Manage packages...
 
-from machine import Pin, ADC, SPI
+from machine import Pin, SPI
 import time
 import ssd1306 # this is the library for the OLED
-from servo import Servo
-
-
-##############################################################
-# POT
-
-pot_pin = ADC(Pin(26))
-
-
-##############################################################
-# SERVO
-
-my_servo = Servo(pin_id=0)
 
 
 
@@ -46,9 +33,6 @@ oled = ssd1306.SSD1306_SPI(
 )
 
 
-
-
-
 ##############################################################
 # SPLASH SCREEN
 
@@ -62,19 +46,3 @@ time.sleep(2)
 
 
 
-
-
-
-while True:
-    
-    pot_value = pot_pin.read_u16()
-    
-    servo_angle = int((pot_value / 65535) * 180)
-    
-    my_servo.write(servo_angle)
-
-    time.sleep(0.02)
-    
-    oled.fill(0)
-    oled.text(f"Angle: {servo_angle}", 0, 0)
-    oled.show()
