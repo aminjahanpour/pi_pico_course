@@ -4,7 +4,7 @@ import time
 
 # set up the onboard LED as a digital output
 # the LED is hard-wired to GPIO25
-led = Pin("LED", Pin.OUT)
+led = Pin(25, Pin.OUT)
 
 
 while True:
