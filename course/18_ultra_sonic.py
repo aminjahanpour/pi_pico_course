@@ -2,7 +2,7 @@ from hcsr04 import HCSR04
 from time import sleep
 
 # Create the sensor object
-sensor = HCSR04(trigger_pin=15, echo_pin=14)
+sensor = HCSR04(trigger_pin=16, echo_pin=17)
 
 while True:
     try:
