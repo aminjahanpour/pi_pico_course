@@ -14,7 +14,7 @@ while True:
         distance = sensor.distance_cm()
         print("Distance:", round(distance, 2), "cm")
 
-        if (distance > 20):
+        if (distance < 20):
             led.on()
         else:
             led.off()
