@@ -10,5 +10,6 @@ while True:
     x_ = x.read_u16() / 32768
     y_ = y.read_u16() / 32768
 
-    print(x_ , y_ , sw.value())
+    # print(x_ , y_ , sw.value())
+    print(x_ , y_)
     time.sleep(0.05)
