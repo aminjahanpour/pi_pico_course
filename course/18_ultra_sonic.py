@@ -22,14 +22,18 @@ while True:
 
 
         if (distance < 20):
-            led.on()
-            
             t1 = t1 + 1
         
         else:
+            #led.off()
+            t1 = 0
+
+
+        if (t1 > 20):
+            led.on()
+        else:
             led.off()
 
-            t1 = 0
 
 
         print(t1)
