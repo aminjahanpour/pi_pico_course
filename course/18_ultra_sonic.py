@@ -3,8 +3,13 @@ from machine import Pin
 from hcsr04 import HCSR04
 from time import sleep
 
+import time
+
+
+
 led = Pin(25, Pin.OUT)
 
+t1 = 0
 
 # Create the sensor object
 sensor = HCSR04(trigger_pin=16, echo_pin=17)
@@ -12,13 +17,22 @@ sensor = HCSR04(trigger_pin=16, echo_pin=17)
 while True:
     try:
         distance = sensor.distance_cm()
-        print("Distance:", round(distance, 2), "cm")
+        #print("Distance:", round(distance, 2), "cm")
+
+
 
         if (distance < 20):
             led.on()
+            
+            t1 = t1 + 1
+        
         else:
             led.off()
 
+            t1 = 0
+
+
+        print(t1)
 
     except OSError as e:
         print("Measurement error:", e)
