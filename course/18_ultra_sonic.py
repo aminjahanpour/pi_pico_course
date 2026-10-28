@@ -8,6 +8,10 @@ import time
 
 
 led = Pin(25, Pin.OUT)
+buzzer = Pin(15, Pin.OUT)
+
+led.off()
+buzzer.off()
 
 t1 = 0
 
@@ -31,8 +35,10 @@ while True:
 
         if (t1 > 20):
             led.on()
+            buzzer.on()
         else:
             led.off()
+            buzzer.off()
 
 
 
