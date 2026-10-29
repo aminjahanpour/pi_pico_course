@@ -47,7 +47,7 @@ radio = NRF24L01(          # Create and configure the nRF24L01 radio object
 # INITIALIZE
 
 
-radio.open_rx_pipe(0, b"NODE2")
+radio.open_rx_pipe(0, b"NODE1")
 radio.start_listening()
 
 
