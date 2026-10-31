@@ -4,12 +4,12 @@ import time
 
 # set up GPIO14 as a digital input.
 # the set the pin to be internally pulled high
-gpio14 = Pin(14, Pin.IN, Pin.PULL_UP)
+gpio13 = Pin(13, Pin.IN, Pin.PULL_UP)
 
 
 while True:
 
-    if gpio14.value() == 0:
+    if gpio13.value() == 0:
         # the pin is grounded
         print(0)
 
