@@ -1,5 +1,5 @@
 from machine import Pin, PWM
-
+import time
 
 # any GPIO pin can also be a PWM pin
 # let's use this one because you already have an LED around it
@@ -7,7 +7,7 @@ pwm_pin = PWM(Pin(15))
 
 # frequency: how many times in a second the pin is turned on and off
 # 1000 works fine for an LED
-pwm_pin.freq(1000)
+pwm_pin.freq(20000)
 
 # this is the largest integer you can fit in 16 bits
 max_duty_cycle = 65535
@@ -17,3 +17,6 @@ duty_cycle = int(0.5 * max_duty_cycle)
 
 
 pwm_pin.duty_u16(duty_cycle)
+
+while True:
+    time.sleep(1)
