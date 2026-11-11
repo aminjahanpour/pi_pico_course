@@ -4,40 +4,27 @@ import time
 
 # I can have both digital input and digital output pins on my board
 
-# my digital input pin
-gpio14 = Pin(14, Pin.IN, Pin.PULL_UP)
+# the button
+my_button = Pin(13, Pin.IN, Pin.PULL_UP)
 
-# my digital output pin
-gpio15 = Pin(15, Pin.OUT)
+# the two LEDs
+first_led = Pin(14, Pin.OUT)
+second_led = Pin(15, Pin.OUT)
 
 
 while True:
 
 
+    if my_button.value() == 0:
+        # the btn is pressed
+        first_led.on()
+        second_led.off()
 
-    ##########################################
-    # Handling digital output
-
-
-    gpio15.on()   # flip GPIO15
-
-    time.sleep(0.1)     # wait 1 second
-
-    gpio15.off()   # flip GPIO15
-
-    time.sleep(0.1)     # wait 1 second
-
-
-
-
-
-
-    ##########################################
-    # Handling digital input
-
-    if gpio14.value() == 0:
-        print(0)
     else:
-        print(1)
+        first_led.off()
+        second_led.on()
+
+    time.sleep(0.1)     # wait 1 second
+
 
 
