@@ -18,7 +18,12 @@ while True:
     button_1_is_pressed = button_1.value() == 0
     button_2_is_pressed = button_2.value() == 0
 
-    both_buttons_are_pressed = button_1_is_pressed and button_2_is_pressed
+    both_buttons_are_pressed               = button_1_is_pressed     and      button_2_is_pressed
+    
+    at_least_one_of_the_buttons_is_pressed = button_1_is_pressed      or      button_2_is_pressed
+
+
+
 
     if both_buttons_are_pressed:
 
