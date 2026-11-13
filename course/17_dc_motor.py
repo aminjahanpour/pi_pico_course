@@ -1,19 +1,23 @@
-from machine import Pin, PWM
+from machine import Pin, ADC, PWM
+import time
 
+pot_pin = ADC(Pin(26))
 
-# any GPIO pin can also be a PWM pin
-# let's use this one because you already have an LED around it
 pwm_pin = PWM(Pin(15))
 
-# frequency: how many times in a second the pin is turned on and off
-# 1000 works fine for an LED
 pwm_pin.freq(10000)
 
-# this is the largest integer you can fit in 16 bits
-max_duty_cycle = 65535
 
-# duty cycle: what percentage of the time, the pin is on
-duty_cycle = int(0.95 * max_duty_cycle)
+while True:
+    
+    pot_value = pot_pin.read_u16()
+
+    duty_cycle = pot_value
+
+    pwm_pin.duty_u16(duty_cycle)
+
+    print(pot_value, duty_cycle)
+    time.sleep(0.02)
 
 
-pwm_pin.duty_u16(duty_cycle)
+
